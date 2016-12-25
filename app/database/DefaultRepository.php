@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Basic CRUD for implementation in a collection.
+ * Basic CRUD for implementation in a Repository.
  *
  * @author	Wender Pinto Machado
  * @email wenderpmachado@gmail.com
@@ -10,7 +10,7 @@
 
 namespace App\Database;
 
-interface DefaultCollection extends Collection {
+interface DefaultRepository extends Repository {
     public function __construct(Database $database);
     public function create(&$object);
     public function update($object);

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Collection Interface.
+ * Repository Interface.
  *
  * @author	Wender Pinto Machado
  * @email wenderpmachado@gmail.com
@@ -10,7 +10,7 @@
 
 namespace App\Database;
 
-interface Collection {
+interface Repository {
     public function __construct(Database $database);
     public function getDatabase();
 }

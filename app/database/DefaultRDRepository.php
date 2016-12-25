@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Basic implementation of Relational Database Collection.
+ * Basic implementation of Relational Database Repository.
  *
  * @author	Wender Pinto Machado
  * @email wenderpmachado@gmail.com
@@ -12,18 +12,18 @@ namespace App\Database;
 
 use phputil\di\DI;
 
-abstract class DefaultRDCollection implements DefaultCollection, Relationships {
+abstract class DefaultRDRepository implements DefaultRepository, Relationships {
     private $database = null;
     private $hasMany = null;
     private $hasOne = null;
-    const DEFAULT_PREFIX_COLLECTION = 'ColecaoDe';
+    const DEFAULT_PREFIX_Repository = 'ColecaoDe';
 
     public function __construct(Database $database){
         $this->database = $database;
     }
 
     /*
-     * DefaultCollection implementations
+     * DefaultRepository implementations
      */
     public function getDatabase(){
         return $this->database;
@@ -78,46 +78,46 @@ abstract class DefaultRDCollection implements DefaultCollection, Relationships {
      * Relationships implementations
      */
     public function hasOne(&$object, $relationalClass, $foreignKey = false, $localKey = 'id'){
-        $relationalCollection = DI::create($this->classNameWithNamespaceToCollectionName($relationalClass));
+        $relationalRepository = DI::create($this->classNameWithNamespaceToRepositoryName($relationalClass));
         $foreignKey = $this->formatForeignKey($this->getTableName(), $foreignKey);
-        $command = 'SELECT '.$relationalCollection->getTableName().'.* FROM '.$relationalCollection->getTableName().' WHERE '.$foreignKey.' = :id';
+        $command = 'SELECT '.$relationalRepository->getTableName().'.* FROM '.$relationalRepository->getTableName().' WHERE '.$foreignKey.' = :id';
         // var_dump('HasOne -> '.$command);
         // print_r("--------------------------------------------------------------------------------------------------------------------------\n");
         $parameters = [ 'id' => $object->getId() ];
-        $theOne = $relationalCollection->getDatabase()->queryObjects([$relationalCollection,'recordToObject'], $command, $parameters )[0];
+        $theOne = $relationalRepository->getDatabase()->queryObjects([$relationalRepository,'recordToObject'], $command, $parameters )[0];
         return ($theOne) ? $theOne : false;
     }
 
     public function hasMany(&$object, $relationalClass, $foreignKey = false, $localKey = 'id'){
-        $relationalCollection = DI::create($this->classNameWithNamespaceToCollectionName($relationalClass));
+        $relationalRepository = DI::create($this->classNameWithNamespaceToRepositoryName($relationalClass));
         $foreignKey = $this->formatForeignKey($this->getTableName(), $foreignKey);
-        $command = 'SELECT '.$relationalCollection->getTableName().'.* FROM '.$relationalCollection->getTableName().' WHERE '.$foreignKey.' = :id';
+        $command = 'SELECT '.$relationalRepository->getTableName().'.* FROM '.$relationalRepository->getTableName().' WHERE '.$foreignKey.' = :id';
         // var_dump('HasMany -> '.$command);
         // print_r("--------------------------------------------------------------------------------------------------------------------------\n");
         $parameters = [ 'id' => $object->getId() ];
-        $theMany = $relationalCollection->getDatabase()->queryObjects([$relationalCollection,'recordToObject'], $command, $parameters );
+        $theMany = $relationalRepository->getDatabase()->queryObjects([$relationalRepository,'recordToObject'], $command, $parameters );
         return ($theMany) ? $theMany : false;
     }
 
     public function belongsTo(&$object, $relationalClass, $foreignKey = false, $localKey = 'id'){
-        $relationalCollection = DI::create($this->classNameWithNamespaceToCollectionName($relationalClass));
-        $foreignKey = $this->formatForeignKey($relationalCollection->getTableName(), $foreignKey);
-        $command = 'SELECT '.$relationalCollection->getTableName().'.* FROM '.$relationalCollection->getTableName().' JOIN '.$this->getTableName().' ON '.$this->getTableName().'.'.$foreignKey.' = '.$relationalCollection->getTableName().'.id WHERE '.$this->getTableName().'.id = :id';
+        $relationalRepository = DI::create($this->classNameWithNamespaceToRepositoryName($relationalClass));
+        $foreignKey = $this->formatForeignKey($relationalRepository->getTableName(), $foreignKey);
+        $command = 'SELECT '.$relationalRepository->getTableName().'.* FROM '.$relationalRepository->getTableName().' JOIN '.$this->getTableName().' ON '.$this->getTableName().'.'.$foreignKey.' = '.$relationalRepository->getTableName().'.id WHERE '.$this->getTableName().'.id = :id';
         // var_dump('BelongsTo -> '.$command);
         // print_r("--------------------------------------------------------------------------------------------------------------------------\n");
         $parameters = [ 'id' => $object->getId() ];
-        $theBelongsTo = $relationalCollection->getDatabase()->queryObjects([$relationalCollection,'recordToObject'], $command, $parameters )[0];
+        $theBelongsTo = $relationalRepository->getDatabase()->queryObjects([$relationalRepository,'recordToObject'], $command, $parameters )[0];
         return ($theBelongsTo) ? $theBelongsTo : false;
     }
 
     public function belongsToMany(&$object, $relationalClass, $foreignKey = false, $localKey = 'id'){
-        $relationalCollection = DI::create($this->classNameWithNamespaceToCollectionName($relationalClass));
-        $foreignKey = $this->formatForeignKey($relationalCollection->getTableName(), $foreignKey);
-        $command = 'SELECT '.$relationalCollection->getTableName().'.* FROM '.$relationalCollection->getTableName().' JOIN '.$this->getTableName().' ON '.$this->getTableName().'.'.$foreignKey.' = '.$relationalCollection->getTableName().'.id WHERE '.$this->getTableName().'.id = :id';
+        $relationalRepository = DI::create($this->classNameWithNamespaceToRepositoryName($relationalClass));
+        $foreignKey = $this->formatForeignKey($relationalRepository->getTableName(), $foreignKey);
+        $command = 'SELECT '.$relationalRepository->getTableName().'.* FROM '.$relationalRepository->getTableName().' JOIN '.$this->getTableName().' ON '.$this->getTableName().'.'.$foreignKey.' = '.$relationalRepository->getTableName().'.id WHERE '.$this->getTableName().'.id = :id';
         // var_dump('BelongsToMany -> '.$command);
         // print_r("--------------------------------------------------------------------------------------------------------------------------\n");
         $parameters = [ 'id' => $object->getId() ];
-        $theBelongsToMany = $relationalCollection->getDatabase()->queryObjects([$relationalCollection,'recordToObject'], $command, $parameters );
+        $theBelongsToMany = $relationalRepository->getDatabase()->queryObjects([$relationalRepository,'recordToObject'], $command, $parameters );
         return ($theBelongsToMany) ? $theBelongsToMany : false;
     }
 
@@ -161,10 +161,10 @@ abstract class DefaultRDCollection implements DefaultCollection, Relationships {
         return ($foreignKey) ? $foreignKey : $relationalTableName . '_id';
     }
 
-    public static function classNameWithNamespaceToCollectionName($classNameWithNamespace){
+    public static function classNameWithNamespaceToRepositoryName($classNameWithNamespace){
         $relationalExploded = explode('\\', $classNameWithNamespace);
         $relationalClassName = array_pop($relationalExploded);
-        return self::DEFAULT_PREFIX_COLLECTION . $relationalClassName;
+        return self::DEFAULT_PREFIX_Repository . $relationalClassName;
     }
 
     /*

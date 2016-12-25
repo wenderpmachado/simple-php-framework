@@ -51,51 +51,51 @@ class ClassMaker {
     }
 
     /**
-     * Create the Collection Interface and the Collection in Relational Database files.
+     * Create the Repository Interface and the Repository in Relational Database files.
      *
      * @param string $className
      * @param array $parameters
      * @param bool $overwrite
      * @return bool
      */
-    public function makeCollection($className, $parameters, $overwrite = true){
-        $collection['interface'] = $this->makeCollectionInterface($className);
-        $collection['bdr'] = $this->makeCollectionInRD($className, $parameters);
+    public function makeRepository($className, $parameters, $overwrite = true){
+        $Repository['interface'] = $this->makeRepositoryInterface($className);
+        $Repository['bdr'] = $this->makeRepositoryInRD($className, $parameters);
 
         $classNameInterface = 'ColecaoDe'.$className;
         $classNameRD = 'ColecaoDe'.$className.'EmBDR';
-        $returnInterface = $this->createDirAndClass($className, $classNameInterface, $collection['interface'], $overwrite);
-        $returnRD = $this->createDirAndClass($className, $classNameRD, $collection['bdr'], $overwrite);
+        $returnInterface = $this->createDirAndClass($className, $classNameInterface, $Repository['interface'], $overwrite);
+        $returnRD = $this->createDirAndClass($className, $classNameRD, $Repository['bdr'], $overwrite);
         return ($returnInterface && $returnRD) ? true : false;
     }
 
     /**
-     * Create the Collection Interface file.
+     * Create the Repository Interface file.
      *
      * @param string $className
-     * @param array $collectionInterfaceUses
+     * @param array $RepositoryInterfaceUses
      * @return string
      */
-    private function makeCollectionInterface($className, $collectionInterfaceUses = ['App\BancoDados\ColecaoPadrao']){
+    private function makeRepositoryInterface($className, $RepositoryInterfaceUses = ['App\BancoDados\ColecaoPadrao']){
         $namespace = $this->makeNamespace($className);
-        $usesString = $this->usesToString($collectionInterfaceUses);
+        $usesString = $this->usesToString($RepositoryInterfaceUses);
 
-        $collectionInterface  = $this->makeHeadClass($namespace, $usesString);
-        $collectionInterface .= 'interface ColecaoDe'.$className.' extends ColecaoPadrao {'.PHP_EOL;
-        $collectionInterface .= PHP_EOL."}";
-        return $collectionInterface;
+        $RepositoryInterface  = $this->makeHeadClass($namespace, $usesString);
+        $RepositoryInterface .= 'interface ColecaoDe'.$className.' extends ColecaoPadrao {'.PHP_EOL;
+        $RepositoryInterface .= PHP_EOL."}";
+        return $RepositoryInterface;
     }
 
     /**
-     * Create the Collection in Relational Database file.
+     * Create the Repository in Relational Database file.
      *
      * @param string $className
      * @param array $parameters
-     * @param array $collectionInRDUses
+     * @param array $RepositoryInRDUses
      * @return string
      */
-    private function makeCollectionInRD($className, $parameters, $collectionInRDUses = ['App\BancoDados\ColecaoEmBDRPadrao']){
-        $usesString = $this->usesToString($collectionInRDUses);
+    private function makeRepositoryInRD($className, $parameters, $RepositoryInRDUses = ['App\BancoDados\ColecaoEmBDRPadrao']){
+        $usesString = $this->usesToString($RepositoryInRDUses);
         $fields = $this->parametersToFields($parameters);
         $namespace = $this->makeNamespace($className);
         $tableName = lcfirst($className);
@@ -103,41 +103,41 @@ class ClassMaker {
         $objPopulated = $this->populateClassUsingSetters($objectName, $fields);
         $arrayPopulated = $this->populateArrayUsingGetters($objectName, $fields);
 
-        $collectionInRD  = $this->makeHeadClass($namespace, $usesString);
-        $collectionInRD .= 'class ColecaoDe'.$className.'EmBDR extends ColecaoEmBDRPadrao implements ColecaoDe'.$className.' {';
-        $collectionInRD .= PHP_EOL;
-        $collectionInRD .= "\t".'public function recordToObject($record, $blocks = []){';
-        $collectionInRD .= PHP_EOL;
-        $collectionInRD .= "\t\t".$objectName.' = new '.$className.'();';
-        $collectionInRD .= PHP_EOL;
-        $collectionInRD .= $objPopulated;
-        $collectionInRD .= "\t\t".'return '.$objectName .';';
-        $collectionInRD .= PHP_EOL;
-        $collectionInRD .= "\t}";
-        $collectionInRD .= PHP_EOL;
-        $collectionInRD .= PHP_EOL;
+        $RepositoryInRD  = $this->makeHeadClass($namespace, $usesString);
+        $RepositoryInRD .= 'class ColecaoDe'.$className.'EmBDR extends ColecaoEmBDRPadrao implements ColecaoDe'.$className.' {';
+        $RepositoryInRD .= PHP_EOL;
+        $RepositoryInRD .= "\t".'public function recordToObject($record, $blocks = []){';
+        $RepositoryInRD .= PHP_EOL;
+        $RepositoryInRD .= "\t\t".$objectName.' = new '.$className.'();';
+        $RepositoryInRD .= PHP_EOL;
+        $RepositoryInRD .= $objPopulated;
+        $RepositoryInRD .= "\t\t".'return '.$objectName .';';
+        $RepositoryInRD .= PHP_EOL;
+        $RepositoryInRD .= "\t}";
+        $RepositoryInRD .= PHP_EOL;
+        $RepositoryInRD .= PHP_EOL;
 
-        $collectionInRD .= "\t".'public function objectToRecord('.$objectName.', $blocks = []){';
-        $collectionInRD .= PHP_EOL;
-        $collectionInRD .= "\t\t".'return [';
-        $collectionInRD .= PHP_EOL;
-        $collectionInRD .= $arrayPopulated;
-        $collectionInRD .= PHP_EOL;
-        $collectionInRD .= "\t\t".'];';
-        $collectionInRD .= PHP_EOL;
-        $collectionInRD .= "\t".'}';
-        $collectionInRD .= PHP_EOL;
-        $collectionInRD .= PHP_EOL;
+        $RepositoryInRD .= "\t".'public function objectToRecord('.$objectName.', $blocks = []){';
+        $RepositoryInRD .= PHP_EOL;
+        $RepositoryInRD .= "\t\t".'return [';
+        $RepositoryInRD .= PHP_EOL;
+        $RepositoryInRD .= $arrayPopulated;
+        $RepositoryInRD .= PHP_EOL;
+        $RepositoryInRD .= "\t\t".'];';
+        $RepositoryInRD .= PHP_EOL;
+        $RepositoryInRD .= "\t".'}';
+        $RepositoryInRD .= PHP_EOL;
+        $RepositoryInRD .= PHP_EOL;
 
-        $collectionInRD .= "\t".'public function getTableName(){';
-        $collectionInRD .= PHP_EOL;
-        $collectionInRD .= "\t\treturn '".$tableName."';";
-        $collectionInRD .= PHP_EOL;
-        $collectionInRD .= "\t".'}';
-        $collectionInRD .= PHP_EOL;
-        $collectionInRD .= '}';
+        $RepositoryInRD .= "\t".'public function getTableName(){';
+        $RepositoryInRD .= PHP_EOL;
+        $RepositoryInRD .= "\t\treturn '".$tableName."';";
+        $RepositoryInRD .= PHP_EOL;
+        $RepositoryInRD .= "\t".'}';
+        $RepositoryInRD .= PHP_EOL;
+        $RepositoryInRD .= '}';
 
-        return $collectionInRD;
+        return $RepositoryInRD;
     }
 
     public function makeController(){
@@ -257,4 +257,4 @@ $parameters = [
 ];
 $className = 'Address';
 echo $classMaker->makeModel($className, $parameters);
-echo $classMaker->makeCollection($className, $parameters);
+echo $classMaker->makeRepository($className, $parameters);
