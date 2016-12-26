@@ -78,9 +78,11 @@ use App\Database\DefaultRDRepository;
 
 class UserRDRepository extends DefaultRDRepository implements UserRepository {
 	...
-	public function conta(&user){
+	public function account(&user){
         return $this->hasOne(user, 'App\Account\Account');
     }
 	...
 }
 ```
+
+Após essa breve configuração, é possível chamar através da ```UserRDRepository``` a função *account*, passando como argumento o usuário, sendo retornado a sua conta.
