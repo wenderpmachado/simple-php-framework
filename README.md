@@ -79,7 +79,7 @@ use App\Database\DefaultRDRepository;
 class UserRDRepository extends DefaultRDRepository implements UserRepository {
 	...
 	public function account(&user){
-        return $this->hasOne(user, 'App\Account\Account');
+        return $this->hasOne($user, 'App\Account\Account');
     }
 	...
 }
