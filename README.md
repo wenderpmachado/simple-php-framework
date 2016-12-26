@@ -8,6 +8,17 @@ Laravel/Rails, com o intuito de praticar todo conhecimento adiquirido e utilizar
 
 ¹: *Agradecimento especial ao professor [Thiago Delgado Pinto](https://github.com/thiagodp) pelas diversas explicações e ótimas bibliotecas disponibilizadas aqui no github.*
 
+### Bibliotecas ###
+-------------------
+- robmorgan/phinx
+- phputil/json
+- phputil/pdowrapper
+- phputil/di
+- phputil/rtti
+- phputil/traits
+- vlucas/phpdotenv
+- slim/slim
+
 ### Arquitetura ###
 -------------------
 O framework implementa o CRUD baseado no [Repository Pattern](https://github.com/domnikl/DesignPatternsPHP/tree/master/More/Repository).
