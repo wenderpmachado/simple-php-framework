@@ -36,6 +36,8 @@ No arquivo temporário seria possível utilizar os métodos:
 Exemplo:
 
 ```php
+<?php
+
 require_once '../vendor/autoload.php';
 
 $classMaker = new ClassMaker();
@@ -51,3 +53,34 @@ $classMaker->makeRepository($className, $parameters);
 ²: *Futuramente será implementado a criação dessa estrutura de classes via CLI*
 
 ³: *Ainda não implementado*
+
+### Relacionamento entre Classes ###
+------------------------------------
+Como é feito em um Object Relational Mapper (ORM), há possibilidade de relacionar classes de forma simples graças a padronização da arquitetura.
+Essa associação é feita através de algumas funções implementadas da interface ```Relationships``` na classe ```DefaultRDRepository``` (herdada por todas as novas RDRepository's). Elas são:
+
+- hasOne
+- hasMany
+- belongsTo
+- belongsToMany
+
+Imaginemos um cenário onde existam dois modelos: um chamado ```User``` e o outro ```Account```, onde *account* possui a chave estrangeira de *user*. 
+*User* está apto a possuir *hasOne* ou *hasMany* e *Account* a possuir *belongsTo* ou *belongsToMany*, dependendo da quantidade permitida de contas por usuário.
+
+Exemplo:
+
+```php
+<?php
+
+namespace App\User;
+
+use App\Database\DefaultRDRepository;
+
+class UserRDRepository extends DefaultRDRepository implements UserRepository {
+	...
+	public function conta(&user){
+        return $this->hasOne(user, 'App\Account\Account');
+    }
+	...
+}
+```
