@@ -25,7 +25,7 @@ Cada modelo possui uma pasta com seu nome dentro da pasta principal do projeto, 
     -   Extende da DefaultRDRepository, própria do framework, com as funções padrões do CRUD já implementadas
     
 ### Criação das Classes ###
--------------------------------
+---------------------------
 Para fins de criar essa estrutura, foi criado uma classe chamada ```ClassMaker```, na raiz da pasta ```app```, que deve ser utilizada em um arquivo temporário².
 No arquivo temporário seria possível utilizar os métodos:
 
@@ -49,4 +49,5 @@ $classMaker->makeRepository($className, $parameters);
 ```
  
 ²: *Futuramente será implementado a criação dessa estrutura de classes via CLI*
+
 ³: *Ainda não implementado*
