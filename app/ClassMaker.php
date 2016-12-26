@@ -94,7 +94,7 @@ class ClassMaker {
      * @param array $RepositoryInRDUses
      * @return string
      */
-    private function makeRepositoryInRD($className, $parameters, $RepositoryInRDUses = ['App\Database\DafaultRDRepository']){
+    private function makeRepositoryInRD($className, $parameters, $RepositoryInRDUses = ['App\Database\DefaultRDRepository']){
         $usesString = $this->usesToString($RepositoryInRDUses);
         $fields = $this->parametersToFields($parameters);
         $namespace = $this->makeNamespace($className);
@@ -104,7 +104,7 @@ class ClassMaker {
         $arrayPopulated = $this->populateArrayUsingGetters($objectName, $fields);
 
         $RepositoryInRD  = $this->makeHeadClass($namespace, $usesString);
-        $RepositoryInRD .= 'class '.$className.'RDRepository extends DafaultRDRepository implements '.$className.'Repository {';
+        $RepositoryInRD .= 'class '.$className.'RDRepository extends DefaultRDRepository implements '.$className.'Repository {';
         $RepositoryInRD .= PHP_EOL;
         $RepositoryInRD .= "\t".'public function recordToObject($record, $blocks = []){';
         $RepositoryInRD .= PHP_EOL;
