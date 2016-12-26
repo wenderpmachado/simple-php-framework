@@ -2,7 +2,7 @@
 
 ### História ###
 ----------------
-Após um bom tempo estudando o [Laravel Framework](https://github.com/laravel/laravel) (PHP) e um pouco de [Rails](https://github.com/rails/rails) (Ruby), de várias pesquisar em relação a quais tecnologias utilizar para projetos em que participo e 
+Após um bom tempo estudando o [Laravel Framework](https://github.com/laravel/laravel) (PHP) e um pouco de [Rails](https://github.com/rails/rails) (Ruby), de várias pesquisas em relação a quais tecnologias utilizar para projetos em que participo e 
 de conversas com amigos de trabalho e faculdade, incluindo professores¹, resolvi reunir o que achava interessante, framework agnóstico e *clean*, junto com algumas ideias vistas no 
 Laravel/Rails, com o intuito de praticar todo conhecimento adiquirido e utilizar em projetos próprios que não necessitam de grande infraestrutura. 
 
@@ -68,7 +68,7 @@ $classMaker->makeRepository($className, $parameters);
 ### Relacionamento entre Classes ###
 ------------------------------------
 Como é feito em um Object Relational Mapper (ORM), há possibilidade de relacionar classes de forma simples graças a padronização da arquitetura.
-Essa associação é feita através de algumas funções implementadas da interface ```Relationships``` na classe ```DefaultRDRepository``` (herdada por todas as novas RDRepository's). Elas são:
+Essa associação é feita através de algumas funções implementadas na classe ```DefaultRDRepository``` (herdada por todas as novas RDRepository's) da interface ```Relationships```. Elas são:
 
 - hasOne
 - hasMany
