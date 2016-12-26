@@ -36,7 +36,7 @@ No arquivo temporário seria possível utilizar os métodos:
 Exemplo:
 
 ```php
-require_once __DIR__ . '/vendor/autoload.php';
+require_once '../vendor/autoload.php';
 
 $classMaker = new ClassMaker();
 $className = 'Address';
