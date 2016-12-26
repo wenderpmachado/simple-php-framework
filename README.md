@@ -64,7 +64,7 @@ Essa associação é feita através de algumas funções implementadas da interf
 - belongsTo
 - belongsToMany
 
-Imaginemos um cenário onde existam dois modelos: um chamado ```User``` e o outro ```Account```, onde *account* possui a chave estrangeira de *user*. 
+Imaginemos um cenário onde existem dois modelos: um chamado ```User``` e o outro ```Account```, onde *account* possui a chave estrangeira de *user*. 
 *User* está apto a possuir *hasOne* ou *hasMany* e *Account* a possuir *belongsTo* ou *belongsToMany*, dependendo da quantidade permitida de contas por usuário.
 
 Exemplo:
