@@ -23,3 +23,30 @@ Cada modelo possui uma pasta com seu nome dentro da pasta principal do projeto, 
 - ModelNameRBRepository
     -   Classe com as regras de negócio referente ao Banco de Dados Relacional
     -   Extende da DefaultRDRepository, própria do framework, com as funções padrões do CRUD já implementadas
+    
+### Criação das Classes ###
+-------------------------------
+Para fins de criar essa estrutura, foi criado uma classe chamada ```ClassMaker```, na raiz da pasta ```app```, que deve ser utilizada em um arquivo temporário².
+No arquivo temporário seria possível utilizar os métodos:
+
+- makeModel
+- makeRepository
+- makeController³
+    
+Exemplo:
+
+```php
+require_once __DIR__ . '/vendor/autoload.php';
+
+$classMaker = new ClassMaker();
+$className = 'Address';
+$parameters = [
+    'id' => 'integer',
+    'road' => 'string'
+];
+$classMaker->makeModel($className, $parameters);
+$classMaker->makeRepository($className, $parameters);
+```
+ 
+²: *Futuramente será implementado a criação dessa estrutura de classes via CLI*
+³: *Ainda não implementado*

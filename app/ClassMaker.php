@@ -62,8 +62,8 @@ class ClassMaker {
         $Repository['interface'] = $this->makeRepositoryInterface($className);
         $Repository['bdr'] = $this->makeRepositoryInRD($className, $parameters);
 
-        $classNameInterface = 'ColecaoDe'.$className;
-        $classNameRD = 'ColecaoDe'.$className.'EmBDR';
+        $classNameInterface = $className.'Repository';
+        $classNameRD = $className.'RDRepository';
         $returnInterface = $this->createDirAndClass($className, $classNameInterface, $Repository['interface'], $overwrite);
         $returnRD = $this->createDirAndClass($className, $classNameRD, $Repository['bdr'], $overwrite);
         return ($returnInterface && $returnRD) ? true : false;
@@ -76,12 +76,12 @@ class ClassMaker {
      * @param array $RepositoryInterfaceUses
      * @return string
      */
-    private function makeRepositoryInterface($className, $RepositoryInterfaceUses = ['App\BancoDados\ColecaoPadrao']){
+    private function makeRepositoryInterface($className, $RepositoryInterfaceUses = ['App\Database\DefaultRepository']){
         $namespace = $this->makeNamespace($className);
         $usesString = $this->usesToString($RepositoryInterfaceUses);
 
         $RepositoryInterface  = $this->makeHeadClass($namespace, $usesString);
-        $RepositoryInterface .= 'interface ColecaoDe'.$className.' extends ColecaoPadrao {'.PHP_EOL;
+        $RepositoryInterface .= 'interface '.$className.'Repository extends DefaultRepository {'.PHP_EOL;
         $RepositoryInterface .= PHP_EOL."}";
         return $RepositoryInterface;
     }
@@ -94,7 +94,7 @@ class ClassMaker {
      * @param array $RepositoryInRDUses
      * @return string
      */
-    private function makeRepositoryInRD($className, $parameters, $RepositoryInRDUses = ['App\BancoDados\ColecaoEmBDRPadrao']){
+    private function makeRepositoryInRD($className, $parameters, $RepositoryInRDUses = ['App\Database\DafaultRDRepository']){
         $usesString = $this->usesToString($RepositoryInRDUses);
         $fields = $this->parametersToFields($parameters);
         $namespace = $this->makeNamespace($className);
@@ -104,7 +104,7 @@ class ClassMaker {
         $arrayPopulated = $this->populateArrayUsingGetters($objectName, $fields);
 
         $RepositoryInRD  = $this->makeHeadClass($namespace, $usesString);
-        $RepositoryInRD .= 'class ColecaoDe'.$className.'EmBDR extends ColecaoEmBDRPadrao implements ColecaoDe'.$className.' {';
+        $RepositoryInRD .= 'class '.$className.'RDRepository extends DafaultRDRepository implements '.$className.'Repository {';
         $RepositoryInRD .= PHP_EOL;
         $RepositoryInRD .= "\t".'public function recordToObject($record, $blocks = []){';
         $RepositoryInRD .= PHP_EOL;
@@ -245,16 +245,3 @@ class ClassMaker {
         return substr($string, 0, -2);
     }
 }
-
-// EXECUTIONd
-
-
-
-$classMaker = new ClassMaker();
-$parameters = [
-    'id' => 'integer',
-    'road' => 'string'
-];
-$className = 'Address';
-echo $classMaker->makeModel($className, $parameters);
-echo $classMaker->makeRepository($className, $parameters);

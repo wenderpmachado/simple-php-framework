@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-use \App\BancoDados\BancoDados;
+use \App\Database\Database;
 use \phputil\di\DI;
 use \phputil\PDOWrapper;
 use \App\Usuario\Usuario;
@@ -17,21 +17,21 @@ $dotenv->load();
 /* Configuração das classes bases */
 
 DI::config(DI::let('PDOWrapper')->call(function(){
-    return new PDOWrapper(BancoDados::buildPDO());
+    return new PDOWrapper(Database::buildPDO());
 })->shared());
 
-DI::config(DI::let('BancoDados')->call(function(){
-    return new BancoDados(DI::create('PDOWrapper'));
+DI::config(DI::let('Database')->call(function(){
+    return new Database(DI::create('PDOWrapper'));
 })->shared());
 
 /* Configuração das Coleções */
 
 DI::config(DI::let('ColecaoDeUsuario')->call(function(){
-    return new ColecaoDeUsuarioEmBDR(DI::create('BancoDados'));
+    return new ColecaoDeUsuarioEmBDR(DI::create('Database'));
 })->shared());
 
 DI::config(DI::let('ColecaoDeConta')->call(function(){
-    return new ColecaoDeContaEmBDR(DI::create('BancoDados'));
+    return new ColecaoDeContaEmBDR(DI::create('Database'));
 })->shared());
 
 
@@ -43,7 +43,7 @@ DI::config(DI::let('ColecaoDeConta')->call(function(){
 //$collection = DI::create($relationalCollectionName);
 
 //$relationalClass = 'App\Usuario\Usuario';
-//$collection = DI::create(\App\BancoDados\ColecaoEmBDRPadrao::classNameWithNamespaceToCollectionName($relationalClass));
+//$collection = DI::create(\App\Database\ColecaoEmBDRPadrao::classNameWithNamespaceToCollectionName($relationalClass));
 //$colecaoDeUsuario = DI::create('ColecaoDeUsuario');
 //$usuario = new Usuario();
 //$usuario->setId(2);
@@ -53,7 +53,7 @@ DI::config(DI::let('ColecaoDeConta')->call(function(){
 ////print_r("--------------------------------------------------------------------------------------------------------------------------\n");
 //
 //$relationalClass = 'App\Conta\Conta';
-//$collection = DI::create(\App\BancoDados\ColecaoEmBDRPadrao::classNameWithNamespaceToCollectionName($relationalClass));
+//$collection = DI::create(\App\Database\ColecaoEmBDRPadrao::classNameWithNamespaceToCollectionName($relationalClass));
 //$colecaoDeUsuario = DI::create('ColecaoDeUsuario');
 //$conta = new Conta();
 //$conta->setId(1);
