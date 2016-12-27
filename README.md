@@ -97,3 +97,15 @@ class UserRDRepository extends DefaultRDRepository implements UserRepository {
 ```
 
 Após essa breve configuração, é possível chamar através da ```UserRDRepository``` a função *account*, passando como argumento o usuário, sendo retornado a sua conta.
+
+### Injeção de Dependência ###
+-------------------------------
+A injeção de dependência (ou inversão de dependência) é configurada no arquivo ```config/ioc.php```, utilizado a biblioteca [thiagodp/di](https://github.com/thiagodp/di).
+Para facilitar esse procedimento, a ```ClassMaker``` faz esse trabalho pra gente logo após executar a função *makeRepository*, inserindo a linha de configuração da classe recém criada.
+
+```php
+...
+DI::config(DI::let('AddressRepository')->create('\App\Address\AddressRDRepository')->shared());
+```
+
+Após realizar essa configuração, o comando *DI::make('AddressRepository')* retornará um objeto *AddressRDRepository*, pronto para realizar as chamadas ao banco de dados relacional.
