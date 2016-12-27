@@ -4,48 +4,9 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
+    "hash": "1e036dd713878d068d7697f12f30c240",
     "content-hash": "1a5d32bcb531b5cc9cee591994203645",
     "packages": [
-        {
-            "name": "almasaeed2010/adminlte",
-            "version": "v2.3.7",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/almasaeed2010/AdminLTE.git",
-                "reference": "797b65b3ca90525a4e048de5b8d02ba6878ea239"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/almasaeed2010/AdminLTE/zipball/797b65b3ca90525a4e048de5b8d02ba6878ea239",
-                "reference": "797b65b3ca90525a4e048de5b8d02ba6878ea239",
-                "shasum": ""
-            },
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Abdullah Almsaeed",
-                    "email": "abdullah@almsaeedstudio.com"
-                }
-            ],
-            "description": "AdminLTE - admin control panel and dashboard that's based on Bootstrap 3",
-            "homepage": "http://almsaeedstudio.com/",
-            "keywords": [
-                "JS",
-                "admin",
-                "back-end",
-                "css",
-                "less",
-                "responsive",
-                "template",
-                "theme",
-                "web"
-            ],
-            "time": "2016-10-19T15:34:25+00:00"
-        },
         {
             "name": "container-interop/container-interop",
             "version": "1.1.0",
@@ -71,20 +32,20 @@
                 "MIT"
             ],
             "description": "Promoting the interoperability of container objects (DIC, SL, etc.)",
-            "time": "2014-12-30T15:22:37+00:00"
+            "time": "2014-12-30 15:22:37"
         },
         {
             "name": "nikic/fast-route",
-            "version": "v1.0.1",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/FastRoute.git",
-                "reference": "8ea928195fa9b907f0d6e48312d323c1a13cc2af"
+                "reference": "f3dcf5130e634b6123d40727d612ec6aa4f61fb3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/FastRoute/zipball/8ea928195fa9b907f0d6e48312d323c1a13cc2af",
-                "reference": "8ea928195fa9b907f0d6e48312d323c1a13cc2af",
+                "url": "https://api.github.com/repos/nikic/FastRoute/zipball/f3dcf5130e634b6123d40727d612ec6aa4f61fb3",
+                "reference": "f3dcf5130e634b6123d40727d612ec6aa4f61fb3",
                 "shasum": ""
             },
             "require": {
@@ -114,7 +75,7 @@
                 "router",
                 "routing"
             ],
-            "time": "2016-06-12T19:08:51+00:00"
+            "time": "2016-10-20 17:36:47"
         },
         {
             "name": "phputil/di",
@@ -158,28 +119,25 @@
                 "injection",
                 "injector"
             ],
-            "time": "2016-07-07T00:45:34+00:00"
+            "time": "2016-07-07 00:45:34"
         },
         {
             "name": "phputil/json",
-            "version": "1.2.2",
+            "version": "1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thiagodp/json.git",
-                "reference": "c5a3b91a7cc48134d8a9a0584518942a05a4a141"
+                "reference": "0b28ebe71c79534fe55e44ce0dd90b0ffcf3a8bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thiagodp/json/zipball/c5a3b91a7cc48134d8a9a0584518942a05a4a141",
-                "reference": "c5a3b91a7cc48134d8a9a0584518942a05a4a141",
+                "url": "https://api.github.com/repos/thiagodp/json/zipball/0b28ebe71c79534fe55e44ce0dd90b0ffcf3a8bd",
+                "reference": "0b28ebe71c79534fe55e44ce0dd90b0ffcf3a8bd",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.2.0",
-                "phputil/rtti": ">=1.3"
-            },
-            "require-dev": {
-                "phputil/rtti": ">=1.0"
+                "phputil/rtti": ">=1.4"
             },
             "type": "library",
             "autoload": {
@@ -207,7 +165,7 @@
                 "private",
                 "protected"
             ],
-            "time": "2016-08-11T06:32:21+00:00"
+            "time": "2016-11-11 21:30:35"
         },
         {
             "name": "phputil/pdowrapper",
@@ -247,20 +205,20 @@
                 "pdo",
                 "php"
             ],
-            "time": "2016-05-18T18:51:17+00:00"
+            "time": "2016-05-18 18:51:17"
         },
         {
             "name": "phputil/rtti",
-            "version": "1.3",
+            "version": "1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thiagodp/rtti.git",
-                "reference": "e8ad69d220743e413bdacaff2c996716b72acd63"
+                "reference": "f73326dded0733e7739930a2400a426ede50261d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thiagodp/rtti/zipball/e8ad69d220743e413bdacaff2c996716b72acd63",
-                "reference": "e8ad69d220743e413bdacaff2c996716b72acd63",
+                "url": "https://api.github.com/repos/thiagodp/rtti/zipball/f73326dded0733e7739930a2400a426ede50261d",
+                "reference": "f73326dded0733e7739930a2400a426ede50261d",
                 "shasum": ""
             },
             "require": {
@@ -290,20 +248,20 @@
                 "rtti",
                 "run-time"
             ],
-            "time": "2016-08-11T06:17:18+00:00"
+            "time": "2016-11-11 21:17:29"
         },
         {
             "name": "phputil/traits",
-            "version": "1.0",
+            "version": "1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thiagodp/traits.git",
-                "reference": "251099fc533333eb4361005bd572dce328ef6713"
+                "reference": "9d7e98b4e899fd1d1503ac637bfeab32f6c0e247"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thiagodp/traits/zipball/251099fc533333eb4361005bd572dce328ef6713",
-                "reference": "251099fc533333eb4361005bd572dce328ef6713",
+                "url": "https://api.github.com/repos/thiagodp/traits/zipball/9d7e98b4e899fd1d1503ac637bfeab32f6c0e247",
+                "reference": "9d7e98b4e899fd1d1503ac637bfeab32f6c0e247",
                 "shasum": ""
             },
             "require": {
@@ -336,7 +294,7 @@
                 "setter",
                 "trait"
             ],
-            "time": "2016-08-15T23:32:22+00:00"
+            "time": "2016-12-14 02:56:37"
         },
         {
             "name": "pimple/pimple",
@@ -382,7 +340,7 @@
                 "container",
                 "dependency injection"
             ],
-            "time": "2015-09-11T15:10:35+00:00"
+            "time": "2015-09-11 15:10:35"
         },
         {
             "name": "psr/http-message",
@@ -432,7 +390,7 @@
                 "request",
                 "response"
             ],
-            "time": "2016-08-06T14:39:51+00:00"
+            "time": "2016-08-06 14:39:51"
         },
         {
             "name": "psr/log",
@@ -479,7 +437,7 @@
                 "psr",
                 "psr-3"
             ],
-            "time": "2016-10-10T12:19:37+00:00"
+            "time": "2016-10-10 12:19:37"
         },
         {
             "name": "robmorgan/phinx",
@@ -545,20 +503,20 @@
                 "migrations",
                 "phinx"
             ],
-            "time": "2016-10-27T10:16:12+00:00"
+            "time": "2016-10-27 10:16:12"
         },
         {
             "name": "slim/slim",
-            "version": "3.5.0",
+            "version": "3.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/slimphp/Slim.git",
-                "reference": "184352bc1913d7ba552ab4131d62f4730ddb0893"
+                "reference": "4254e40d81559e35cdf856bcbaca5f3af468b7ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/slimphp/Slim/zipball/184352bc1913d7ba552ab4131d62f4730ddb0893",
-                "reference": "184352bc1913d7ba552ab4131d62f4730ddb0893",
+                "url": "https://api.github.com/repos/slimphp/Slim/zipball/4254e40d81559e35cdf856bcbaca5f3af468b7ef",
+                "reference": "4254e40d81559e35cdf856bcbaca5f3af468b7ef",
                 "shasum": ""
             },
             "require": {
@@ -608,14 +566,14 @@
                 }
             ],
             "description": "Slim is a PHP micro framework that helps you quickly write simple yet powerful web applications and APIs",
-            "homepage": "http://slimframework.com",
+            "homepage": "https://slimframework.com",
             "keywords": [
                 "api",
                 "framework",
                 "micro",
                 "router"
             ],
-            "time": "2016-07-26T15:12:13+00:00"
+            "time": "2016-12-20 20:30:47"
         },
         {
             "name": "symfony/config",
@@ -671,7 +629,7 @@
             ],
             "description": "Symfony Config Component",
             "homepage": "https://symfony.com",
-            "time": "2016-12-09T07:45:17+00:00"
+            "time": "2016-12-09 07:45:17"
         },
         {
             "name": "symfony/console",
@@ -734,7 +692,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2016-12-11T14:34:22+00:00"
+            "time": "2016-12-11 14:34:22"
         },
         {
             "name": "symfony/debug",
@@ -791,7 +749,7 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2016-11-16T22:18:16+00:00"
+            "time": "2016-11-16 22:18:16"
         },
         {
             "name": "symfony/filesystem",
@@ -840,7 +798,7 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "https://symfony.com",
-            "time": "2016-11-24T00:46:43+00:00"
+            "time": "2016-11-24 00:46:43"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -899,7 +857,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2016-11-14T01:06:16+00:00"
+            "time": "2016-11-14 01:06:16"
         },
         {
             "name": "symfony/yaml",
@@ -954,7 +912,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2016-12-10T10:07:06+00:00"
+            "time": "2016-12-10 10:07:06"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -1004,7 +962,7 @@
                 "env",
                 "environment"
             ],
-            "time": "2016-09-01T10:05:43+00:00"
+            "time": "2016-09-01 10:05:43"
         }
     ],
     "packages-dev": [],

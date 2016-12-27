@@ -66,7 +66,9 @@ class ClassMaker {
         $classNameRD = $className.'RDRepository';
         $returnInterface = $this->createDirAndClass($className, $classNameInterface, $Repository['interface'], $overwrite);
         $returnRD = $this->createDirAndClass($className, $classNameRD, $Repository['bdr'], $overwrite);
-        return ($returnInterface && $returnRD) ? true : false;
+        $success = ($returnInterface && $returnRD) ? true : false;
+        if($success)
+            return $this->insertDILineIntoIocConfigFile($className);
     }
 
     /**
@@ -243,5 +245,16 @@ class ClassMaker {
             $string .= "\t\t\t'$field' => $objectName->$getterName()," . PHP_EOL;
         }
         return substr($string, 0, -2);
+    }
+
+    private function insertDILineIntoIocConfigFile($className){
+        $namespace = $this->makeNamespace($className);
+        $insert = 'DI::config(DI::let(\''.$className.'Repository\')->create(\'\\'.$namespace.'\\'.$className.'RDRepository\')->shared());';
+        $iocConfigFileLines  = explode(PHP_EOL, file_get_contents(IOC_CONFIG_FILE));
+        if(strlen(end($iocConfigFileLines)) == 0)
+            $iocConfigFileLines[count($iocConfigFileLines)-1] = $insert;
+        else
+            $iocConfigFileLines[] = $insert;
+        return file_put_contents(IOC_CONFIG_FILE , implode(PHP_EOL, $iocConfigFileLines));
     }
 }

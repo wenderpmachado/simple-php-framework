@@ -35,6 +35,10 @@ class Database {
                                  ->build();
     }
 
+    public static function buildPDOWrapper(){
+        return new PDOWrapper(self::buildPDO());
+    }
+
     /**
      * Function for Database directly use the functions of PDOWrapper class.
      *
