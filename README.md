@@ -21,7 +21,7 @@ Laravel/Rails, com o intuito de praticar todo conhecimento adiquirido e utilizar
 
 ### Arquitetura ###
 -------------------
-O framework implementa o CRUD baseado no [Repository Pattern](https://github.com/domnikl/DesignPatternsPHP/tree/master/More/Repository).
+O framework implementa o modelo MVC baseado no [Repository Pattern](https://github.com/domnikl/DesignPatternsPHP/tree/master/More/Repository).
 Cada modelo possui uma pasta com seu nome dentro da pasta principal do projeto, ```app/```, tendo as seguintes classes:
 
 - ModelName
