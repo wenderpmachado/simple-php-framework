@@ -149,8 +149,8 @@ class ClassMaker {
     // UTIL
 
     private function createDirAndClass($dirName, $className, $fileContent, $overwrite = true){
-        $folder = getenv('PROJECT_PATH') . '/app/' . mb_strtolower($dirName);
-        $filePath = getenv('PROJECT_PATH') . '/app/' . mb_strtolower($dirName) . '/' . $className . '.php';
+        $folder = getenv('BASE_DIR') . '/app/' . mb_strtolower($dirName);
+        $filePath = getenv('BASE_DIR') . '/app/' . mb_strtolower($dirName) . '/' . $className . '.php';
 
         if(!is_dir($folder)){
             mkdir($folder);
@@ -204,6 +204,13 @@ class ClassMaker {
             $string .=	PHP_EOL . "\tprivate \$$field" . $this->initialValueFor( $type, $nullify ) . ';';
         }
         return $string;
+    }
+
+    public static function fieldsToMigration($fieldArray){
+        $rows = '';
+        foreach($fieldArray as $field => $type)
+            $rows .= '              ->addColumn(\''.$field.'\', \''.$type.'\')' . PHP_EOL;
+        return $rows;
     }
 
     private function initialValueFor( $type, $nullify = false ) {

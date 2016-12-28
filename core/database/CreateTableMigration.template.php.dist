@@ -1,0 +1,34 @@
+<?php
+
+use $useClassName;
+
+class $className extends $baseClassName
+{
+    /*
+    public function change()
+    {
+
+    }
+    */
+
+    /**
+     * Migrate Up.
+     */
+    public function up()
+    {
+        // create the table
+        $table = $this->table($className);
+        $table->addColumn('id', 'integer')
+              ->addColumn('created', 'datetime')
+              ->addColumn('updated', 'datetime')
+              ->create();
+    }
+
+    /**
+     * Migrate Down.
+     */
+    public function down()
+    {
+        $this->dropTable($className);
+    }
+}

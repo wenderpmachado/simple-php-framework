@@ -16,7 +16,7 @@ abstract class DefaultRDRepository implements DefaultRepository, Relationships {
     private $database = null;
     private $hasMany = null;
     private $hasOne = null;
-    const DEFAULT_PREFIX_Repository = 'ColecaoDe';
+    const DEFAULT_SUFIX_REPOSITORY = 'Repository';
 
     public function __construct(Database $database){
         $this->database = $database;
@@ -27,6 +27,10 @@ abstract class DefaultRDRepository implements DefaultRepository, Relationships {
      */
     public function getDatabase(){
         return $this->database;
+    }
+
+    public function createTable(){
+
     }
 
     public function create(&$object){
@@ -164,7 +168,7 @@ abstract class DefaultRDRepository implements DefaultRepository, Relationships {
     public static function classNameWithNamespaceToRepositoryName($classNameWithNamespace){
         $relationalExploded = explode('\\', $classNameWithNamespace);
         $relationalClassName = array_pop($relationalExploded);
-        return self::DEFAULT_PREFIX_Repository . $relationalClassName;
+        return $relationalClassName . self::DEFAULT_SUFIX_REPOSITORY;
     }
 
     /*
