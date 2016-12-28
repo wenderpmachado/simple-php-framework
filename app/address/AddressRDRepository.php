@@ -3,6 +3,7 @@
 namespace App\Address;
 
 use Core\Database\DefaultRDRepository;
+use Phinx\Migration\MigrationInterface;
 
 class AddressRDRepository extends DefaultRDRepository implements AddressRepository {
 	public function recordToObject($record, $blocks = []){
@@ -21,5 +22,14 @@ class AddressRDRepository extends DefaultRDRepository implements AddressReposito
 
 	public function getTableName(){
 		return 'address';
+	}
+
+	public function createTableWithPhinx(MigrationInterface $migration){
+		$table = $migration->table($this->getTableName());
+		return $table->addColumn('id', 'integer')
+					 ->addColumn('road', 'string')
+					 ->addColumn('created', 'datetime')
+					 ->addColumn('updated', 'datetime')
+					 ->create();
 	}
 }

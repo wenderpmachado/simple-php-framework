@@ -12,3 +12,5 @@ $parameters = [
 ];
 echo $classMaker->makeModel($className, $parameters);
 echo $classMaker->makeRepository($className, $parameters);
+
+//var_dump(\phputil\di\DI::create('AddressRepository'));

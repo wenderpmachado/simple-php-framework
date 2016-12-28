@@ -96,7 +96,7 @@ class ClassMaker {
      * @param array $RepositoryInRDUses
      * @return string
      */
-    private function makeRepositoryInRD($className, $parameters, $RepositoryInRDUses = ['Core\Database\DefaultRDRepository']){
+    private function makeRepositoryInRD($className, $parameters, $RepositoryInRDUses = ['Core\Database\DefaultRDRepository', 'Phinx\Migration\MigrationInterface']){
         $usesString = $this->usesToString($RepositoryInRDUses);
         $fields = $this->parametersToFields($parameters);
         $namespace = $this->makeNamespace($className);
@@ -134,6 +134,17 @@ class ClassMaker {
         $RepositoryInRD .= "\t".'public function getTableName(){';
         $RepositoryInRD .= PHP_EOL;
         $RepositoryInRD .= "\t\treturn '".$tableName."';";
+        $RepositoryInRD .= PHP_EOL;
+        $RepositoryInRD .= "\t".'}';
+        $RepositoryInRD .= PHP_EOL;
+        $RepositoryInRD .= PHP_EOL;
+
+        $RepositoryInRD .= "\t".'public function createTableWithPhinx(MigrationInterface $migration){';
+        $RepositoryInRD .= PHP_EOL;
+        $RepositoryInRD .= "\t\t".'$table = $migration->table($this->getTableName());';
+        $RepositoryInRD .= PHP_EOL;
+        $RepositoryInRD .= "\t\t".'return ' . $this->fieldsToMigration($fields);
+        $RepositoryInRD .= "\t\t\t\t\t ".'->create();';
         $RepositoryInRD .= PHP_EOL;
         $RepositoryInRD .= "\t".'}';
         $RepositoryInRD .= PHP_EOL;
@@ -206,10 +217,20 @@ class ClassMaker {
         return $string;
     }
 
-    public static function fieldsToMigration($fieldArray){
-        $rows = '';
-        foreach($fieldArray as $field => $type)
-            $rows .= '              ->addColumn(\''.$field.'\', \''.$type.'\')' . PHP_EOL;
+    private function fieldsToMigration($fieldArray, $varTableName = '$table', $created = true, $updated = true){
+        $rows = $varTableName;
+        foreach($fieldArray as $field => $type){
+            if(reset($fieldArray) != $type)
+                $rows .= "\t\t\t\t\t ";
+            $rows .= '->addColumn(\'' . $field . '\', \'' . $this->fieldTypeToColumnType($type) . '\')' . PHP_EOL;
+        }
+
+        if($created)
+            $rows .= "\t\t\t\t\t ".'->addColumn(\'created\', \'datetime\')' . PHP_EOL;
+
+        if($updated)
+            $rows .= "\t\t\t\t\t ".'->addColumn(\'updated\', \'datetime\')' . PHP_EOL;
+
         return $rows;
     }
 
@@ -221,6 +242,14 @@ class ClassMaker {
         if ( 'array'   === $type ) { return ' = array()'; }
         if ( $nullify ) { return ' = null'; }
         return ''; // None
+    }
+
+    private function fieldTypeToColumnType($type){
+        if ( 'string'  === $type ) { return 'string'; }
+        if ( 'integer' === $type || 'int'   === $type ) { return 'integer'; }
+        if ( 'double'  === $type || 'float' === $type ) { return 'float'; }
+        if ( 'boolean' === $type || 'bool'  === $type ) { return 'boolean'; }
+        return $type;
     }
 
     private function functionName( $field ) {

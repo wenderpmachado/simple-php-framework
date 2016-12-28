@@ -11,8 +11,9 @@
 namespace Core\Database;
 
 use phputil\di\DI;
+use Phinx\Migration\MigrationInterface;
 
-abstract class DefaultRDRepository implements DefaultRepository, Relationships {
+abstract class DefaultRDRepository implements DefaultRepository, Relationships, PhinxIntegration {
     private $database = null;
     private $hasMany = null;
     private $hasOne = null;
@@ -27,10 +28,6 @@ abstract class DefaultRDRepository implements DefaultRepository, Relationships {
      */
     public function getDatabase(){
         return $this->database;
-    }
-
-    public function createTable(){
-
     }
 
     public function create(&$object){
@@ -180,4 +177,6 @@ abstract class DefaultRDRepository implements DefaultRepository, Relationships {
     public abstract function objectToRecord($object, $blocks);
 
     public abstract function getTableName();
+
+    public abstract function createTableWithPhinx(MigrationInterface $migration);
 }

@@ -25,7 +25,7 @@ class Database {
     }
 
     public static function buildPDO(){
-        $dsn = getenv('DB_CONNECTION').':host='.getenv('DB_HOST').';dbname='.getenv('DB_DATABASE').';';
+        $dsn = getenv('DB_ADAPTER').':host='.getenv('DB_HOST').';dbname='.getenv('DB_DATABASE').';';
         return PDOBuilder::with()->dsn($dsn)
                                  ->username(getenv('DB_USERNAME'))
                                  ->password(getenv('DB_PASSWORD'))
