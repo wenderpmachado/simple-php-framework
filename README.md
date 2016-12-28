@@ -111,3 +111,23 @@ DI::config(DI::let('AddressRepository')->create('\App\Address\AddressRDRepositor
 ```
 
 Após realizar essa configuração, o comando *DI::make('AddressRepository')* retornará um objeto *AddressRDRepository*, pronto para realizar as chamadas ao banco de dados relacional.
+
+### Migrações ###
+-----------------
+Após todas as configurações feitas, é necessário criar a tabela no banco de dados. O ClassMaker aproveita os parametros passados para criar uma migração de criação de tabela,
+através da biblioteca [robmorgan/phinx](https://github.com/robmorgan/phinx/), que pode ser executada através do comando no console:
+ 
+```cmd
+$ vendor/bin/phinx migrate
+```
+
+Para cada alteração no banco de dados é indicado a criação de uma migração com a implementação das funções: *up* e *down*
+Ao rodar o comando *migrate*, todas as migrações que ainda não foram rodadas serão nesse momento, utilizando a função *up*.
+Caso deseja reverter as alterações, o comando a ser executado no console é:
+
+```cmd
+$ vendor/bin/phinx rollback
+```
+Neste caso a função *down* será executada.
+
+Para mais detalhes sobre as migrações, acesse a wiki do projeto em: [docs.phinx.org](http://docs.phinx.org/en/latest/) 
