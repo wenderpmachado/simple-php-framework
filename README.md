@@ -114,8 +114,8 @@ Após realizar essa configuração, o comando *DI::make('AddressRepository')* re
 
 ### Migrações ###
 -----------------
-Após todas as configurações feitas, é necessário criar a tabela no banco de dados. O ClassMaker aproveita os parametros passados para criar uma migração de criação de tabela,
-através da biblioteca [robmorgan/phinx](https://github.com/robmorgan/phinx/), que pode ser executada através do comando no console:
+Após todas as configurações feitas, é necessário criar a tabela no banco de dados. O ClassMaker aproveita os parametros passados na criação das classes acima para criar uma migração
+de criação de tabela, através da biblioteca [robmorgan/phinx](https://github.com/robmorgan/phinx/), que pode ser executada através do comando no console:
  
 ```cmd
 $ vendor/bin/phinx migrate

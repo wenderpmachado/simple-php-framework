@@ -2,8 +2,6 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-use \phputil\di\DI;
-
 $dotenv = new Dotenv\Dotenv(__DIR__);
 $dotenv->load();
 
@@ -12,6 +10,6 @@ define('ROUTES_FILE', __DIR__ . '/config/routes.php');
 
 require_once IOC_CONFIG_FILE;
 
-
-
 //require_once ROUTES_FILE;
+
+require_once 'app/examples.php';
