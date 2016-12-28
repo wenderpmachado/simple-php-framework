@@ -26,8 +26,7 @@ class AddressRDRepository extends DefaultRDRepository implements AddressReposito
 
 	public function createTableWithPhinx(MigrationInterface $migration){
 		$table = $migration->table($this->getTableName());
-		return $table->addColumn('id', 'integer')
-					 ->addColumn('road', 'string')
+		return $table->addColumn('road', 'string')
 					 ->addColumn('created', 'datetime')
 					 ->addColumn('updated', 'datetime')
 					 ->create();

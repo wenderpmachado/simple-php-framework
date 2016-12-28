@@ -1,11 +1,11 @@
 <?php
 
-require_once '../index.php';
+require_once __DIR__ . '/../index.php';
 
-use $useClassName;
+use Phinx\Migration\AbstractMigration;
 use \phputil\di\DI;
 
-class $className extends $baseClassName
+class Address extends AbstractMigration
 {
     /*
     public function change()
@@ -19,7 +19,7 @@ class $className extends $baseClassName
      */
     public function up()
     {
-        $repository = DI::create('$className'.'Repository');
+        $repository = DI::create('Address'.'Repository');
         $repository->createTableWithPhinx($this);
     }
 
@@ -28,6 +28,6 @@ class $className extends $baseClassName
      */
     public function down()
     {
-        $this->dropTable(strtolower('$className'));
+        $this->dropTable(strtolower('Address'));
     }
 }

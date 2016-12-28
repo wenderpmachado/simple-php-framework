@@ -67,8 +67,11 @@ class ClassMaker {
         $returnInterface = $this->createDirAndClass($className, $classNameInterface, $Repository['interface'], $overwrite);
         $returnRD = $this->createDirAndClass($className, $classNameRD, $Repository['bdr'], $overwrite);
         $success = ($returnInterface && $returnRD) ? true : false;
-        if($success)
-            return $this->insertDILineIntoIocConfigFile($className);
+        if($success){
+            $this->insertDILineIntoIocConfigFile($className);
+            ExecUtil::composerDumpAutoload();
+            ExecUtil::createMigration($className);
+        }
     }
 
     /**
@@ -220,9 +223,11 @@ class ClassMaker {
     private function fieldsToMigration($fieldArray, $varTableName = '$table', $created = true, $updated = true){
         $rows = $varTableName;
         foreach($fieldArray as $field => $type){
-            if(reset($fieldArray) != $type)
-                $rows .= "\t\t\t\t\t ";
-            $rows .= '->addColumn(\'' . $field . '\', \'' . $this->fieldTypeToColumnType($type) . '\')' . PHP_EOL;
+            if($field != 'id'){
+                if(reset($fieldArray) != $type)
+                    $rows .= "\t\t\t\t\t ";
+                $rows .= '->addColumn(\'' . $field . '\', \'' . $this->fieldTypeToColumnType($type) . '\')' . PHP_EOL;
+            }
         }
 
         if($created)
