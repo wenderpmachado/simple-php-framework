@@ -2,7 +2,7 @@
 
 namespace App\Address;
 
-use App\Database\DefaultRepository;
+use Core\Database\DefaultRepository;
 
 interface AddressRepository extends DefaultRepository {
 

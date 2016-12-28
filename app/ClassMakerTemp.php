@@ -2,11 +2,13 @@
 
 require_once '../index.php';
 
+use Core\helper\ClassMaker;
+
 $classMaker = new ClassMaker();
+$className = 'Address';
 $parameters = [
     'id' => 'integer',
     'road' => 'string'
 ];
-$className = 'Address';
 echo $classMaker->makeModel($className, $parameters);
 echo $classMaker->makeRepository($className, $parameters);

@@ -9,9 +9,9 @@
  * @version	0.6
  */
 
-class ClassMaker {
-    const MAIN_FOLDER = __DIR__;
+namespace Core\Helper;
 
+class ClassMaker {
     /**
      * Create the model class.
      *
@@ -78,7 +78,7 @@ class ClassMaker {
      * @param array $RepositoryInterfaceUses
      * @return string
      */
-    private function makeRepositoryInterface($className, $RepositoryInterfaceUses = ['App\Database\DefaultRepository']){
+    private function makeRepositoryInterface($className, $RepositoryInterfaceUses = ['Core\Database\DefaultRepository']){
         $namespace = $this->makeNamespace($className);
         $usesString = $this->usesToString($RepositoryInterfaceUses);
 
@@ -96,7 +96,7 @@ class ClassMaker {
      * @param array $RepositoryInRDUses
      * @return string
      */
-    private function makeRepositoryInRD($className, $parameters, $RepositoryInRDUses = ['App\Database\DefaultRDRepository']){
+    private function makeRepositoryInRD($className, $parameters, $RepositoryInRDUses = ['Core\Database\DefaultRDRepository']){
         $usesString = $this->usesToString($RepositoryInRDUses);
         $fields = $this->parametersToFields($parameters);
         $namespace = $this->makeNamespace($className);
@@ -149,8 +149,8 @@ class ClassMaker {
     // UTIL
 
     private function createDirAndClass($dirName, $className, $fileContent, $overwrite = true){
-        $folder = ClassMaker::MAIN_FOLDER . '/' . mb_strtolower($dirName);
-        $filePath = ClassMaker::MAIN_FOLDER . '/' . mb_strtolower($dirName) . '/' . $className . '.php';
+        $folder = getenv('PROJECT_PATH') . '/app/' . mb_strtolower($dirName);
+        $filePath = getenv('PROJECT_PATH') . '/app/' . mb_strtolower($dirName) . '/' . $className . '.php';
 
         if(!is_dir($folder)){
             mkdir($folder);

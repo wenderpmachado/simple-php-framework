@@ -4,7 +4,9 @@
 ----------------
 Após um bom tempo estudando o [Laravel Framework](https://github.com/laravel/laravel) (PHP) e um pouco de [Rails](https://github.com/rails/rails) (Ruby), de várias pesquisas em relação a quais tecnologias utilizar para projetos em que participo e 
 de conversas com amigos de trabalho e faculdade, incluindo professores¹, resolvi reunir o que achava interessante, framework agnóstico e *clean*, junto com algumas ideias vistas no 
-Laravel/Rails, com o intuito de praticar todo conhecimento adiquirido e utilizar em projetos próprios que não necessitam de grande infraestrutura. 
+Laravel/Rails, com o intuito de praticar todo conhecimento adiquirido e utilizar em projetos próprios que não necessitam de grande infraestrutura.
+
+Vale ressaltar que **não** é aconselhavel a utilização deste framework em produção, ainda. :)
 
 ¹: *Agradecimento especial ao professor [Thiago Delgado Pinto](https://github.com/thiagodp) pelas diversas explicações e ótimas bibliotecas disponibilizadas aqui no github.*
 
@@ -37,7 +39,7 @@ Cada modelo possui uma pasta com seu nome dentro da pasta principal do projeto, 
     
 ### Criação das Classes ###
 ---------------------------
-Para fins de criar essa estrutura, foi criado uma classe chamada ```ClassMaker```, na raiz da pasta ```app```, que deve ser utilizada em um arquivo temporário².
+Para fins de criar essa estrutura, foi criado uma classe chamada ```ClassMaker```, na pasta ```app/helper```, que deve ser utilizada em um arquivo temporário².
 No arquivo temporário seria possível utilizar os métodos:
 
 - makeModel

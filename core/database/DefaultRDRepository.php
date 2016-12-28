@@ -8,7 +8,7 @@
  * @version 0.7
  */
 
-namespace App\Database;
+namespace Core\Database;
 
 use phputil\di\DI;
 

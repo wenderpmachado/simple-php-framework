@@ -8,7 +8,7 @@
  * @version 1.0
  */
 
-namespace App\Database;
+namespace Core\Database;
 
 interface Repository {
     public function __construct(Database $database);

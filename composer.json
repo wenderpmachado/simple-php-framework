@@ -11,10 +11,17 @@
         "phputil/traits": "^1.0",
         "robmorgan/phinx": "^0.6.5"
     },
+    "require-dev": {
+        "composer/composer": "dev-master"
+    },
     "autoload": {
         "classmap" : [
-            "app/"
+            "app/",
+            "core/"
         ],
-        "psr-4": {"App\\": "app/"}
+        "psr-4": {
+            "App\\": "app/",
+            "Core\\": "core/"
+        }
     }
 }

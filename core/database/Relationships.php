@@ -8,7 +8,7 @@
  * @version 0.7
  */
 
-namespace App\Database;
+namespace Core\Database;
 
 interface Relationships {
     public function hasOne(&$object, $relationalClass, $foreignKey, $localKey);

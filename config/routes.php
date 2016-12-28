@@ -1,7 +1,7 @@
 <?php
 /**
- * @author	Wender Pinto Machado
+ * @author Wender Pinto Machado
  * @email wenderpmachado@gmail.com
- * @version	0.2
+ * @version 0.0
  */
 

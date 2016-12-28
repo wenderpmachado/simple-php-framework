@@ -1,7 +1,13 @@
 <?php
 
+/**
+ * @author Wender Pinto Machado
+ * @email wenderpmachado@gmail.com
+ * @version 1.0
+ */
+
 use \phputil\di\DI;
-use \App\Database\Database;
+use \Core\Database\Database;
 
 // Main configuration
 

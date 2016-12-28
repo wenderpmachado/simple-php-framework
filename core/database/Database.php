@@ -3,12 +3,12 @@
 /**
  * Class to connect and interaction with the database.
  *
- * @author	Wender Pinto Machado
+ * @author Wender Pinto Machado
  * @email wenderpmachado@gmail.com
  * @version 1.0
  */
 
-namespace App\Database;
+namespace Core\Database;
 
 use phputil\PDOBuilder;
 use phputil\PDOWrapper;

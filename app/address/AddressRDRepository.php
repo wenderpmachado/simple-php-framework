@@ -2,7 +2,7 @@
 
 namespace App\Address;
 
-use App\Database\DefaultRDRepository;
+use Core\Database\DefaultRDRepository;
 
 class AddressRDRepository extends DefaultRDRepository implements AddressRepository {
 	public function recordToObject($record, $blocks = []){
