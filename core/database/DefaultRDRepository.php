@@ -81,11 +81,11 @@ abstract class DefaultRDRepository implements DefaultRepository, Relationships, 
     public function hasOne(&$object, $relationalClass, $foreignKey = false, $localKey = 'id'){
         $relationalRepository = DI::create($this->classNameWithNamespaceToRepositoryName($relationalClass));
         $foreignKey = $this->formatForeignKey($this->getTableName(), $foreignKey);
-        $command = "SELECT CONCAT(:relationalTableName,'.*') FROM :relationalTableName WHERE :foreignKey = :id";
+        $command = 'SELECT '.$relationalRepository->getTableName().'.* FROM '.$relationalRepository->getTableName().' WHERE '.$foreignKey.' = :id';
         $parameters = [
-            'relationalTableName' => $relationalRepository->getTableName(),
+            'id' => $object->getId(),
             'foreignKey' => $foreignKey,
-            'id' => $object->getId()
+            'tableName' => $relationalRepository->getTableName()
         ];
         $theOne = $relationalRepository->getDatabase()->queryObjects([$relationalRepository,'recordToObject'], $command, $parameters )[0];
         return ($theOne) ? $theOne : false;
@@ -94,12 +94,8 @@ abstract class DefaultRDRepository implements DefaultRepository, Relationships, 
     public function hasMany(&$object, $relationalClass, $foreignKey = false, $localKey = 'id'){
         $relationalRepository = DI::create($this->classNameWithNamespaceToRepositoryName($relationalClass));
         $foreignKey = $this->formatForeignKey($this->getTableName(), $foreignKey);
-        $command = "SELECT CONCAT(:relationalTableName,'.*') FROM :relationalTableName WHERE :foreignKey = :id";
-        $parameters = [
-            'relationalTableName' => $relationalRepository->getTableName(),
-            'foreignKey' => $foreignKey,
-            'id' => $object->getId()
-        ];
+        $command = 'SELECT '.$relationalRepository->getTableName().'.* FROM '.$relationalRepository->getTableName().' WHERE '.$foreignKey.' = :id';
+        $parameters = [ 'id' => $object->getId() ];
         $theMany = $relationalRepository->getDatabase()->queryObjects([$relationalRepository,'recordToObject'], $command, $parameters );
         return ($theMany) ? $theMany : false;
     }
@@ -107,13 +103,8 @@ abstract class DefaultRDRepository implements DefaultRepository, Relationships, 
     public function belongsTo(&$object, $relationalClass, $foreignKey = false, $localKey = 'id'){
         $relationalRepository = DI::create($this->classNameWithNamespaceToRepositoryName($relationalClass));
         $foreignKey = $this->formatForeignKey($relationalRepository->getTableName(), $foreignKey);
-        $command = "SELECT CONCAT(:relationalTableName,'.*') FROM :relationalTableName JOIN :tableName ON CONCAT(:tableName, '.', :foreignKey) = CONCAT(:relationalTableName,'.id') WHERE CONCAT(:tableName,'.id') = :id";
-        $parameters = [
-            'relationalTableName' => $relationalRepository->getTableName(),
-            'tableName' => $this->getTableName(),
-            'foreignKey' => $foreignKey,
-            'id' => $object->getId()
-        ];
+        $command = 'SELECT '.$relationalRepository->getTableName().'.* FROM '.$relationalRepository->getTableName().' JOIN '.$this->getTableName().' ON '.$this->getTableName().'.'.$foreignKey.' = '.$relationalRepository->getTableName().'.id WHERE '.$this->getTableName().'.id = :id';
+        $parameters = [ 'id' => $object->getId() ];
         $theBelongsTo = $relationalRepository->getDatabase()->queryObjects([$relationalRepository,'recordToObject'], $command, $parameters )[0];
         return ($theBelongsTo) ? $theBelongsTo : false;
     }
@@ -121,13 +112,8 @@ abstract class DefaultRDRepository implements DefaultRepository, Relationships, 
     public function belongsToMany(&$object, $relationalClass, $foreignKey = false, $localKey = 'id'){
         $relationalRepository = DI::create($this->classNameWithNamespaceToRepositoryName($relationalClass));
         $foreignKey = $this->formatForeignKey($relationalRepository->getTableName(), $foreignKey);
-        $command = "SELECT CONCAT(:relationalTableName,'.*') FROM :relationalTableName JOIN :tableName ON CONCAT(:tableName, '.', :foreignKey) = CONCAT(:relationalTableName,'.id') WHERE CONCAT(:tableName,'.id') = :id";
-        $parameters = [
-            'relationalTableName' => $relationalRepository->getTableName(),
-            'tableName' => $this->getTableName(),
-            'foreignKey' => $foreignKey,
-            'id' => $object->getId()
-        ];
+        $command = 'SELECT '.$relationalRepository->getTableName().'.* FROM '.$relationalRepository->getTableName().' JOIN '.$this->getTableName().' ON '.$this->getTableName().'.'.$foreignKey.' = '.$relationalRepository->getTableName().'.id WHERE '.$this->getTableName().'.id = :id';
+        $parameters = [ 'id' => $object->getId() ];
         $theBelongsToMany = $relationalRepository->getDatabase()->queryObjects([$relationalRepository,'recordToObject'], $command, $parameters );
         return ($theBelongsToMany) ? $theBelongsToMany : false;
     }
