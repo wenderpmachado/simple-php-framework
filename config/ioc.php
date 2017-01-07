@@ -26,3 +26,4 @@ DI::config(DI::let('Database')->call(function(){
 // Dependency Injection Configuration
 
 DI::config(DI::let('AddressRepository')->create('\App\Address\AddressRDRepository')->shared());
+DI::config(DI::let('UserRepository')->create('\App\User\UserRDRepository')->shared());

@@ -10,6 +10,7 @@ class AddressRDRepository extends DefaultRDRepository implements AddressReposito
 		$address = new Address();
 		$address->setId($record['id']);
 		$address->setRoad($record['road']);
+        $address->setUser($this->user($address));
 		return $address;
 	}
 
@@ -27,8 +28,13 @@ class AddressRDRepository extends DefaultRDRepository implements AddressReposito
 	public function createTableWithPhinx(MigrationInterface $migration){
 		$table = $migration->table($this->getTableName());
 		return $table->addColumn('road', 'string')
+                     ->addColumn('user_id', 'integer')
 					 ->addColumn('created', 'datetime')
 					 ->addColumn('updated', 'datetime')
 					 ->create();
 	}
+
+    public function user($address){
+        return $this->belongsTo($address, '\App\User');
+    }
 }

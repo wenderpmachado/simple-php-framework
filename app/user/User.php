@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Address;
+namespace App\User;
 
 use phputil\traits\GetterSetterWithBuilder;
 
-class Address {
+class User {
 	use GetterSetterWithBuilder;
 
 	private $id = 0;
-	private $road = '';
-    private $user = null;
+	private $name = '';
+	private $email = '';
 }

@@ -222,9 +222,14 @@ class ClassMaker {
 
     private function fieldsToMigration($fieldArray, $varTableName = '$table', $created = true, $updated = true){
         $rows = $varTableName;
+        $fieldArray = array_diff($fieldArray, ['id' => 'integer']);
         foreach($fieldArray as $field => $type){
+            var_dump(reset($fieldArray));
+            var_dump(reset($fieldArray));
             if($field != 'id'){
-                if(reset($fieldArray) != $type)
+                if(reset($fieldArray) != $fieldArray[$field]){
+                    var_dump('entrou');
+                }
                     $rows .= "\t\t\t\t\t ";
                 $rows .= '->addColumn(\'' . $field . '\', \'' . $this->fieldTypeToColumnType($type) . '\')' . PHP_EOL;
             }
