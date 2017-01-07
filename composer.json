@@ -1,6 +1,7 @@
 {
-    "name": "simples-php-framework",
-    "type": "project",
+    "name": "wenderpmachado/simple-php-framework",
+    "description": "Simple php framework using some libraries interesting",
+    "type": "framework",
     "require": {
         "slim/slim": "^3.0",
         "vlucas/phpdotenv": "^2.4",
