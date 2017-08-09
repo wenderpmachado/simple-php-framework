@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Class Creator</title>
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <style>
+            .centered {
+                margin: 0 auto;
+            }
+
+            .text-center {
+                text-align: center;
+            }
+
+            .fa-2 {
+                font-size: 2em;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container" id="app">
+            <h1 class="text-center">
+                Class Creator
+            </h1>
+            <form method="post" action="#" id="form">
+                <hr>
+            <div class="row">
+                <div class="card centered">
+                    <div class="card-block">
+                        <div class="form-group row">
+                            <label for="className" class="col-2 col-form-label">Name:</label>
+                            <div class="col-10">
+                                <input class="form-control" type="text" placeholder="Class Name" name="className" id="className">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row" id="param1">
+                <div class="card centered">
+                    <div class="card-block">
+                        <div class="form-group row">
+                            <label for="className" class="col-2 col-form-label">Param:</label>
+                            <div class="col-10">
+                                <input class="form-control paramName" type="text" placeholder="Parameter Name" name="parameterName[]" value="id" readonly="readonly"><br>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="className" class="col-2 col-form-label">Type:</label>
+                            <input type="hidden" name="parameterType[]" value="integer"> 
+                            <div class="col-10">
+                                <select class="form-control" name="parameterType[]" disabled>
+                                    <option value="string">String</option>
+                                    <option value="integer" selected>Integer</option>
+                                    <option value="double">Double</option>
+                                    <option value="boolean">Boolean</option>
+                                    <option value="false">Object</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row" id="param2">
+                <div class="card centered">
+                    <div class="card-block">
+                        <div class="form-group row">
+                            <label for="className" class="col-2 col-form-label">Param:</label>
+                            <div class="col-10">
+                                <input class="form-control paramName" type="text" placeholder="Parameter Name" name="parameterName[]"><br>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="className" class="col-2 col-form-label">Type:</label>
+                            <div class="col-10">
+                                <select class="form-control" name="parameterType[]">
+                                    <option value="string">String</option>
+                                    <option value="integer">Integer</option>
+                                    <option value="double">Double</option>
+                                    <option value="boolean">Boolean</option>
+                                    <option value="false">Object</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="moreParam"></div>
+            <hr>
+            <div class="row">
+                <div class="card centered">
+                    <div class="row">
+                        <div class="col">
+                            <button type="button" class="btn btn-primary" id="addMoreParam">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="col">
+                            <button type="submit" class="btn btn-primary" id="btnSubmit">
+                                Generate
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        </div>
+
+        <!-- jQuery first, then Tether, then Bootstrap JS. -->
+        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+        <script>
+        (function(){
+            $('#addMoreParam').on('click', function() {
+                paramId += 1;
+                $('#moreParam').append(htmlBlock);
+            })
+
+            $('.paramName').on('keyup', function() {
+                $(this).val($(this).val().toLowerCase());
+            });
+
+            $('#btnSubmit').on('click', function() {
+                $('#form').submit();
+            })
+
+            var paramId = 3;
+
+            var htmlBlock = function() {
+                return '<hr><div class="row" id="param'+ paramId +'">' + 
+                                '<div class="card centered">' + 
+                                    '<div class="card-block">' + 
+                                        '<div class="form-group row">' + 
+                                            '<label for="className" class="col-2 col-form-label">Param:</label>' + 
+                                            '<div class="col-10">' + 
+                                                '<input class="form-control paramName" type="text" placeholder="Parameter Name" name="parameterName[]"><br>' + 
+                                            '</div>' + 
+                                        '</div>' + 
+                                        '<div class="form-group row">' + 
+                                            '<label for="className" class="col-2 col-form-label">Type:</label>' + 
+                                            '<div class="col-10">' + 
+                                                '<select class="form-control" name="parameterType[]">' + 
+                                                    '<option value="string">String</option>' + 
+                                                    '<option value="integer">Integer</option>' + 
+                                                    '<option value="double">Double</option>' + 
+                                                    '<option value="boolean">Boolean</option>' + 
+                                                    '<option value="false">Object</option>' + 
+                                                '</select>' + 
+                                            '</div>' + 
+                                        '</div>' + 
+                                    '</div>' + 
+                                '</div>' + 
+                            '</div>';
+            }
+        })(jQuery)
+        </script>
+    </body>
+</html>

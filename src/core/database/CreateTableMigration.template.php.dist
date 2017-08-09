@@ -1,0 +1,33 @@
+<?php
+
+require_once __DIR__ . '/../pre-config.php';
+
+use $useClassName;
+use \phputil\di\DI;
+
+class $className extends $baseClassName
+{
+    /*
+    public function change()
+    {
+
+    }
+    */
+
+    /**
+     * Migrate Up.
+     */
+    public function up()
+    {
+        $repository = DI::create('$className'.'Repository');
+        $repository->createTableWithPhinx($this);
+    }
+
+    /**
+     * Migrate Down.
+     */
+    public function down()
+    {
+        $this->dropTable(strtolower('$className'));
+    }
+}

@@ -1,18 +1,20 @@
 <?php
 /**
- * @author Phillip Harrington
- * @email philsown@gmail.com
+ * @author 	Phillip Harrington <philsown@gmail.com>
+ * updates	Wender Pinto Machado <wenderpmachado@gmail.com>
  */
+
+require __DIR__ . '/vendor/autoload.php';
 
 $dotenv = new Dotenv\Dotenv(__DIR__);
 $dotenv->load();
 
 return [
     'paths' => [
-        'migrations' => __DIR__ . '/migrations',
+        'migrations' => getenv('BASE_DIR') . getenv('MIGRATIONS_DIR'),
     ],
     'environments' => [
-        'default_migration_table' => 'phinxlog',
+        'default_migration_table' => getenv('PHINX_DEFAULT_MIGRATION_TABLE'),
         'default_database' => getenv('APP_ENV'),
         'develop' => [
             'adapter' => getenv('DB_ADAPTER'),

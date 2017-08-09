@@ -2,6 +2,7 @@ composer.phar
 vendor/
 node_modules/
 .idea/
+.vscode/
 .env
 subdir.lst
 npm-debug.log
