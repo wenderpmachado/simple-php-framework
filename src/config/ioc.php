@@ -23,6 +23,6 @@ DI::config(DI::let('Database')->call(function(){
 })->shared());
 
 // Dependency Injection Configuration
-
+DI::config(DI::let('ClassCreatorController')->create('\Core\Helper\ClassCreator\ClassCreatorController')->shared());
 DI::config(DI::let('CompanyRepository')->create('\App\Company\CompanyRDRepository')->shared());
 DI::config(DI::let('CompanyController')->call(function(){return new App\Company\CompanyController(DI::create('CompanyRepository'));})->shared());
